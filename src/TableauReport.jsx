@@ -161,6 +161,8 @@ class TableauReport extends React.Component {
     const { filters, parameters } = this.props;
     const vizUrl = this.getUrl(nextUrl);
 
+    const {onFirstInteractive: extOnFirstInteractive} = this.props.options
+
     const options = {
       ...filters,
       ...parameters,
@@ -178,7 +180,9 @@ class TableauReport extends React.Component {
             this.sheet = childSheets[0];
           }
         }
-
+        if (extOnFirstInteractive) {
+          extOnFirstInteractive(this)
+        }
         this.props.onLoad && this.props.onLoad(new Date());
       }
     };

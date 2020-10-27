@@ -234,6 +234,9 @@ var TableauReport = function (_React$Component) {
 
       var vizUrl = this.getUrl(nextUrl);
 
+      var extOnFirstInteractive = this.props.options.onFirstInteractive;
+
+
       var options = _extends({}, filters, parameters, this.props.options, {
         onFirstInteractive: function onFirstInteractive() {
           _this4.workbook = _this4.viz.getWorkbook();
@@ -248,7 +251,9 @@ var TableauReport = function (_React$Component) {
               _this4.sheet = childSheets[0];
             }
           }
-
+          if (extOnFirstInteractive) {
+            extOnFirstInteractive(_this4);
+          }
           _this4.props.onLoad && _this4.props.onLoad(new Date());
         }
       });
